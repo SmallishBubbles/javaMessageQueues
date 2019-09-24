@@ -5,6 +5,8 @@ package javaMessageQueues;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.amazonaws.services.sqs.model.AmazonSQSException;
+import com.amazonaws.services.sqs.model.CreateQueueResult;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import sun.rmi.runtime.Log;
 
@@ -21,8 +23,16 @@ public class Producer {
     public static void sendMessage() {
         AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
 
+        String QUEUE_NAMEA = "QueueA";
+        String QUEUE_NAMEB = "QueueB";
+        String QUEUE_NAMEC = "QueueC";
+
+        String queueUrlA = sqs.getQueueUrl(QUEUE_NAMEA).getQueueUrl();
+        String queueUrlB = sqs.getQueueUrl(QUEUE_NAMEB).getQueueUrl();
+        String queueUrlC = sqs.getQueueUrl(QUEUE_NAMEC).getQueueUrl();
+
         SendMessageRequest send_msg_request = new SendMessageRequest()
-                .withQueueUrl("https://sqs.us-west-2.amazonaws.com/798470182683/QueueA")
+                .withQueueUrl(queueUrlA)
                 .withMessageBody("hello world - " + getUUID())
                 .withDelaySeconds(5);
         sqs.sendMessage(send_msg_request);

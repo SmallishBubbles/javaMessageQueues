@@ -11,11 +11,20 @@ import java.util.List;
 public class Receiver {
     public static void receiveMessage() {
         AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
-        List<Message> messages = sqs.receiveMessage("https://sqs.us-west-2.amazonaws.com/798470182683/QueueA").getMessages();
+
+        String QUEUE_NAMEA = "QueueA";
+        String QUEUE_NAMEB = "QueueB";
+        String QUEUE_NAMEC = "QueueC";
+
+        String queueUrlA = sqs.getQueueUrl(QUEUE_NAMEA).getQueueUrl();
+        String queueUrlB = sqs.getQueueUrl(QUEUE_NAMEB).getQueueUrl();
+        String queueUrlC = sqs.getQueueUrl(QUEUE_NAMEC).getQueueUrl();
+
+        List<Message> messages = sqs.receiveMessage(queueUrlA).getMessages();
 
         for ( Message message : messages ) {
             System.out.println(message.getBody());
-            sqs.deleteMessage("https://sqs.us-west-2.amazonaws.com/798470182683/QueueA", message.getReceiptHandle());
+            sqs.deleteMessage(queueUrlA, message.getReceiptHandle());
         }
     }
 
