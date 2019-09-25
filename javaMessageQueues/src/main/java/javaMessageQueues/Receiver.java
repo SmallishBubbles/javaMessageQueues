@@ -6,9 +6,14 @@ import com.amazonaws.services.sqs.model.AmazonSQSException;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.SendMessageBatchRequest;
 
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
+
 import java.util.List;
 
-public class Receiver {
+public class Receiver implements RequestHandler<SQSEvent, Void> {
     public static void receiveMessage() {
         AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
 
@@ -33,4 +38,17 @@ public class Receiver {
             receiveMessage();
         }
     }
+
+    @Override
+    public Void handleRequest(SQSEvent event, Context context)
+    {
+        for(SQSMessage msg : event.getRecords()){
+            System.out.println(new String(msg.getBody()));
+        }
+        return null;
+    }
 }
+
+
+
+
