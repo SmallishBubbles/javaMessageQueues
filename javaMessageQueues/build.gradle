@@ -24,12 +24,12 @@ dependencies {
     compile 'com.amazonaws:aws-lambda-java-events:2.2.6'
     compile 'com.amazonaws:aws-java-sdk:1.11.588'
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:27.1-jre'
-    implementation 'com.google.guava:guava:27.0.1-jre'
     implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.228')
     implementation 'com.amazonaws:aws-java-sdk-sqs'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+
 }
 task buildZip(type: Zip) {
     from compileJava
