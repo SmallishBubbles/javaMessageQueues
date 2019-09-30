@@ -11,6 +11,8 @@ This lambda takes in JSON data at an API gateway endpoint and adds the phone num
 ### Broadcast Message
 A lambda function automatically fires on database updates. If the task status has reached "Finished", the lambda sends a message to the SNS topic which sends a text to all subscribers with the task name that was completed.
 
+![visual of data flow](/visual.jpg)
+
 ______________
 ## SQS Features
 
