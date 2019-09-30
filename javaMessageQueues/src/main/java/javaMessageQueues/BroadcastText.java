@@ -6,10 +6,10 @@ import javaMessageQueues.models.Task;
 
 public class BroadcastText {
 
-    public void broadcastText(Task jsonObject) {
-        AmazonSNS sns = AmazonSNSClient.builder().build();
-
-        String messageToBroadcast
-    }
+//    public void broadcastText(Task jsonObject) {
+//        AmazonSNS sns = AmazonSNSClient.builder().build();
+//
+//        String messageToBroadcast
+//    }
 
 }

@@ -2,9 +2,17 @@
 
 ## How to Run:
 Trust that it works...
+## [Front End](http://taskmaster-frontend-marisha.s3-website-us-west-2.amazonaws.com/)
 
 ### Add Subscriber
 Code attached in pull request.  We implemted both with Java as well as JavaScript.
+This lambda takes in JSON data at an API gateway endpoint and adds the phone number to the SNS topic.
+
+### Broadcast Message
+A lambda function automatically fires on database updates. If the task status has reached "Finished", the lambda sends a message to the SNS topic which sends a text to all subscribers with the task name that was completed.
+
+______________
+## SQS Features
 
 ### Receiver
 We created a JavaScript Lambda that would broadcast out a message to all subscribers.  The code for this lambda is also included in our pull request.
